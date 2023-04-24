@@ -68,7 +68,7 @@ selected_language = st.selectbox('Which language do you want to return?',('Optio
 done = False
 
 if st.button('Execute'):
-    st.write("You're going to query" + str(len(results)) + " POIs. Are you sure?")
+    st.write("You're going to query " + str(len(results)) + " POIs. Are you sure?")
     if st.button('Yes'):
         my_bar = st.progress(0, text='processing...')  
         for k in results:
