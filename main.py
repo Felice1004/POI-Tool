@@ -60,7 +60,7 @@ except:
 
 
 st.header('3 - API Request')
-input_key = st.text_input('You Google Map Key')
+input_key = st.text_input('You API Key')
 selected_country = st.selectbox('Which country are you searching for?',('Option','Taiwan','Korea','Vietnam'))
 selected_region = st.selectbox('Which region are you searching for?',('Option','tw','kr','vn'))
 selected_language = st.selectbox('Which language do you want to return?',('Option','zh-TW','en'))
