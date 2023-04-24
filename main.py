@@ -68,30 +68,29 @@ selected_language = st.selectbox('Which language do you want to return?',('Optio
 done = False
 
 if st.button('Execute'):
-    st.write("You're going to query " + str(len(results)) + " POIs. Are you sure?")
-    if st.button('Yes'):
-        my_bar = st.progress(0, text='processing...')  
-        for k in results:
-            key = input_key 
-            lang = selected_language
-            location="region:"+selected_region
-            address = selected_country + " " + results[k][1]
-
-            url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={location}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
-
-            response = requests.get(url)
-            data = response.json()
-            candidates = data['candidates']
-
-            try:
-                results[k].append(candidates[0]['name'])
-                results[k].append(candidates[0]['formatted_address'])
-            except:
-                results[k].append("NOT FOUND")
-                print('fail', address)
-            my_bar.progress(k/len(results), text='processing...')
     
-        done = True
+    my_bar = st.progress(0, text='processing...')  
+    for k in results:
+        key = input_key 
+        lang = selected_language
+        location="region:"+selected_region
+        address = selected_country + " " + results[k][1]
+
+        url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={location}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
+
+        response = requests.get(url)
+        data = response.json()
+        candidates = data['candidates']
+
+        try:
+            results[k].append(candidates[0]['name'])
+            results[k].append(candidates[0]['formatted_address'])
+        except:
+            results[k].append("NOT FOUND")
+            print('fail', address)
+        my_bar.progress(k/len(results), text='processing...')
+
+    done = True
 import csv
 
 if done:
