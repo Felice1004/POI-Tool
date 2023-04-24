@@ -65,7 +65,7 @@ selected_language = st.selectbox('Which language do you want to return?',('Optio
 
 done = False
 
-if st.button('Execute '+ len(results)+ ' POIs'):
+if st.button('Execute '+ str(len(results))+ ' POIs'):
     
     my_bar = st.progress(0, text='processing...')  
     for k in results:
