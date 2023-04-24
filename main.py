@@ -56,8 +56,6 @@ try:
 except:
     print('Something went wrong. ')
 
-st.write(results[0:10])
-
 
 st.header('3 - API Request')
 input_key = st.text_input('You API Key')
@@ -67,7 +65,7 @@ selected_language = st.selectbox('Which language do you want to return?',('Optio
 
 done = False
 
-if st.button('Execute'):
+if st.button('Execute '+ len(results)+ ' POIs'):
     
     my_bar = st.progress(0, text='processing...')  
     for k in results:
