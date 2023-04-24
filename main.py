@@ -56,7 +56,7 @@ try:
 except:
     print('Something went wrong. ')
 
-# st.write(results)
+st.write(results[0:10])
 
 
 st.header('3 - API Request')
