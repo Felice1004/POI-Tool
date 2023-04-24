@@ -17,7 +17,7 @@ def get_colname_options(data):
         colnames.append(col)
     return colnames
    
-st.title('Klook POI 小工具')
+st.title('Klook POI Extractor')
 
 #----------------------------------------#
 st.header('1. Upload a CSV File')
