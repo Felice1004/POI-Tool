@@ -26,7 +26,7 @@ st.set_page_config(
 )
 
 
-st.title('Klook POI Extractor')
+st.title('Klook POI Data CLeaning Tool')
 
 
 #----------------------------------------#
@@ -117,7 +117,12 @@ if st.button(message):
         else:
             #發過query的就不要再發了，直接次數＋1就好
             output[query_name][0] += 1
-        my_bar.progress(query_name/len(query_list), text='processing...')
+        
+        if selected_query_mode == 'all':
+            my_bar.progress(query_times/len(query_list), text='processing...')
+        else:
+            my_bar.progress(query_times/int(selected_query_mode), text='processing...')
+
 
         if (str(selected_query_mode) != "all") & (str(query_times) == str(selected_query_mode)):
             break
