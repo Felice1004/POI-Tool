@@ -71,64 +71,71 @@ st.header('3 - Confirm API Request Info')
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
 selected_query_mode = st.selectbox('How many queries you would like to execute?(Please check your free quota)',st.secrets["test_mode"])
-
+key = st.secrets["API_key"]
+lang = selected_language
+loc="region:"+selected_country
 ####
 
 done = False
 used_query_name = set()
+used_url = set()
 output=dict()
+query_times = 0
+
 if selected_query_mode == "all":
     message = 'Comfirm & Execute All '+ str(len(query_list))+ ' POIs'
 else :
     message = 'Comfirm & Execute Only TOP'+ str(selected_query_mode)+ ' POIs'
 
-query_times = 0
 if st.button(message):
     my_bar = st.progress(0, text='processing...')  
     for dict_key in query_list:
+        query_url = query_list[dict_key][0]
         query_name = query_list[dict_key][1]
+
+        #只搜尋新地名
         if query_name not in used_query_name:
             # new query name
-            output[query_name] = [0, query_list[dict_key][0], []] #show times, url, query results
+            output[dict_key] = [0, query_url, query_name, []] #show times, url, query name, query results
 
-            #request info
-            key = st.secrets["API_key"]
-            lang = selected_language
-            loc="region:"+selected_country
+            #request
             address = selected_country + " " + query_name
             url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={loc}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
 
             #send request
             response = requests.get(url)
-            query_times +=1
             data = response.json()
             candidates = data['candidates']
 
             #process response
             try:
-                output[query_name][0] += 1
                 #只取搜尋結果前三個
                 for index, candidate in enumerate(candidates):
-                    output[query_name][2].append(candidate['name'])
+                    output[dict_key][3].append('TEST')
+                    # output[dict_key][3].append(candidate['name'])
                     if index >= 3:
                         break
             except:
-                output[query_name][2].append("NOT FOUND")
+                output[dict_key][3].append("NOT FOUND")
             finally:
+                query_times +=1
+                output[dict_key][0] += 1
                 used_query_name.add(query_name)
         else:
             #發過query的就不要再發了，直接次數＋1就好
             output[query_name][0] += 1
-        
+
+        # 更新進度條
         if selected_query_mode == 'all':
             my_bar.progress(query_times/len(query_list), text='processing...')
         else:
             my_bar.progress(query_times/int(selected_query_mode), text='processing...')
 
-
+        #依據選擇的測試模式，判斷是否終止查詢
         if (str(selected_query_mode) != "all") & (str(query_times) == str(selected_query_mode)):
             break
     done = True #是否顯示下載按鈕
+
 import csv
 
 if done:
