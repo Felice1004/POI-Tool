@@ -139,10 +139,13 @@ if st.button(message):
         if (str(selected_query_mode) != "all") & (str(query_times) == str(selected_query_mode)):
             break
     done = True #是否顯示下載按鈕
+    st.write('query_times = ' + str(query_times))
+
 
 import csv
 
 if done:
+
     csv_data = dict_to_csv(output)
     st.download_button(
     label="Download Result",
@@ -150,4 +153,3 @@ if done:
     file_name='query output.csv',
     mime='text/csv')
 
-    st.write('query_times = ' + str(query_times))
