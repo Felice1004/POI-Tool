@@ -58,18 +58,22 @@ except:
 
 st.header('3 - Confirm API Request Info')
 
-user_key = st.secrets("API_key")
-input_key = st.text_input(user_key)
+input_key = st.text_input(st.secrets["API_key"])
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
+selected_mode = st.selectbox('How many query you would like to execute?',st.secrets["test_mode"])
 
 ####
 
 done = False
 used_query_name = set()
 output=dict()
-if st.button('Comfirm & Execute '+ str(len(query_list))+ ' POIs'):
-    
+if selected_mode == "all":
+    message = 'Comfirm & Execute '+ str(len(query_list))+ ' POIs'
+else :
+    message = 'Comfirm & Execute '+ str(len(selected_mode))+ ' POIs'
+
+if st.button(message):
     my_bar = st.progress(0, text='processing...')  
     for query_name in query_list:
         if query_name not in used_query_name:
