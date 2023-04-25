@@ -60,6 +60,7 @@ try:
             poi = poi.split(', ')
             for poi_name in poi:  
                 query_list[i] =  [url, poi_name]
+                i += 1
 except:
     print('Something went wrong. ')
 
