@@ -122,6 +122,7 @@ if st.button(message):
             finally:
                 query_times +=1
                 output[dict_key][0] += 1
+                print(dict_key, output[dict_key][0], type(output[dict_key][0]))
                 used_query_name.add(query_name)
         else:
             #發過query的就不要再發了，直接次數＋1就好
