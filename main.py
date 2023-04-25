@@ -91,7 +91,7 @@ if st.button(message):
     my_bar = st.progress(0, text='processing...')  
     for dict_key in query_list:
         query_url = query_list[dict_key][0]
-        query_name = query_list[dict_key][1]
+        query_name = str.lower(query_list[dict_key][1])
 
         #只搜尋新地名
         if query_name not in used_query_name:
