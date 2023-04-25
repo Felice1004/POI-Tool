@@ -149,3 +149,5 @@ if done:
     data=csv_data,
     file_name='query output.csv',
     mime='text/csv')
+
+    st.write('query_times = ' + str(query_times))
