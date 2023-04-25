@@ -92,11 +92,11 @@ if st.button(message):
     for dict_key in query_list:
         query_url = query_list[dict_key][0]
         query_name = str.lower(query_list[dict_key][1])
+        output[dict_key] = [0, query_url, query_name, []] #show times, url, query name, query results
 
         #只搜尋新地名
         if query_name not in used_query_name:
             # new query name
-            output[dict_key] = [0, query_url, query_name, []] #show times, url, query name, query results
             # output[dict_key][3].append('TEST')
             print('hi')
             #request
