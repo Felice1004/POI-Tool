@@ -125,7 +125,7 @@ if st.button(message):
                 used_query_name.add(query_name)
         else:
             #發過query的就不要再發了，直接次數＋1就好
-            output[query_name][0] += 1
+            output[dict_key][0] += 1
 
         # 更新進度條
         if selected_query_mode == 'all':
