@@ -18,14 +18,15 @@ def get_colname_options(data):
     return colnames
 
 
-st.title('Klook POI Extractor')
-
 st.set_page_config(
    page_title="Klook POI 資料清洗小工具",
    page_icon="🧽",
    layout="wide",
    initial_sidebar_state="expanded",
 )
+
+
+st.title('Klook POI Extractor')
 
 
 #----------------------------------------#
