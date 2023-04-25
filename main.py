@@ -85,16 +85,17 @@ else :
 query_times = 0
 if st.button(message):
     my_bar = st.progress(0, text='processing...')  
-    for query_name in query_list:
+    for dict_key in query_list:
+        query_name = query_list[dict_key][1]
         if query_name not in used_query_name:
             # new query name
-            output[query_name] = [0,[]] #show times, query results
+            output[query_name] = [0, query_list[dict_key][0], []] #show times, url, query results
 
             #request info
             key = st.secrets["API_key"]
             lang = selected_language
             loc="region:"+selected_country
-            address = selected_country + " " + query_list[query_name][1]
+            address = selected_country + " " + query_name
             url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={loc}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
 
             #send request
@@ -106,12 +107,13 @@ if st.button(message):
             #process response
             try:
                 output[query_name][0] += 1
+                #只取搜尋結果前三個
                 for index, candidate in enumerate(candidates):
-                    output[query_name][1].append(candidate['name'])
+                    output[query_name][2].append(candidate['name'])
                     if index >= 3:
                         break
             except:
-                output[query_name][1].append("NOT FOUND")
+                output[query_name][2].append("NOT FOUND")
             finally:
                 used_query_name.add(query_name)
         else:
