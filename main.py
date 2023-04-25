@@ -97,7 +97,8 @@ if st.button(message):
         if query_name not in used_query_name:
             # new query name
             output[dict_key] = [0, query_url, query_name, []] #show times, url, query name, query results
-
+            output[dict_key][3].append('TEST')
+            print('hi')
             #request
             address = selected_country + " " + query_name
             url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={loc}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
@@ -109,6 +110,7 @@ if st.button(message):
 
             #process response
             try:
+                print('tried')
                 #只取搜尋結果前三個
                 for index, candidate in enumerate(candidates):
                     output[dict_key][3].append('TEST')
