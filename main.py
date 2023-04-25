@@ -60,7 +60,7 @@ try:
             poi = poi.split(', ')
             for poi_name in poi:  
                 query_list[i] =  [url, poi_name]
-                i += 1
+                i +=  1
 except:
     print('Something went wrong. ')
 
@@ -118,7 +118,7 @@ if st.button(message):
             output[query_name][0] += 1
         my_bar.progress(query_name/len(query_list), text='processing...')
 
-        if selected_query_mode != "all" & query_times == selected_query_mode:
+        if str(selected_query_mode) != "all" & str(query_times) == str(selected_query_mode):
             break
     done = True #是否顯示下載按鈕
 import csv
