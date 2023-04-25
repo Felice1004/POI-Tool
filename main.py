@@ -20,6 +20,14 @@ def get_colname_options(data):
 
 st.title('Klook POI Extractor')
 
+st.set_page_config(
+   page_title="Klook POI 資料清洗小工具",
+   page_icon="🧽",
+   layout="wide",
+   initial_sidebar_state="expanded",
+)
+
+
 #----------------------------------------#
 st.header('1. Upload a CSV File')
 uploaded_file = st.file_uploader("Choose a csv file containing targeted parsed POI")
@@ -58,7 +66,6 @@ except:
 
 st.header('3 - Confirm API Request Info')
 
-input_key = st.text_input('Please enter your Google API Key',st.secrets["API_key"])
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
 selected_query_mode = st.selectbox('How many queries you would like to execute?(Please check your free quota)',st.secrets["test_mode"])
@@ -82,7 +89,7 @@ if st.button(message):
             output[query_name] = [0,[]] #show times, query results
 
             #request info
-            key = input_key 
+            key = st.secrets["API_key"]
             lang = selected_language
             loc="region:"+selected_country
             address = selected_country + " " + query_list[query_name][1]
