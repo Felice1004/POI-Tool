@@ -57,7 +57,9 @@ except:
 
 
 st.header('3 - Confirm API Request Info')
-input_key = st.text_input(st.secrets("API_key"))
+
+user_key = st.secrets("API_key")
+input_key = st.text_input(user_key)
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
 
