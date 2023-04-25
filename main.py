@@ -68,10 +68,10 @@ except:
 
 st.header('3 - Confirm API Request Info')
 
+key = st.text_input('You API Key')
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
 selected_query_mode = st.selectbox('How many queries you would like to execute?(Please check your free quota)',st.secrets["test_mode"])
-key = st.secrets["API_key"]
 lang = selected_language
 loc="region:"+selected_country
 ####
@@ -98,7 +98,6 @@ if st.button(message):
         if query_name not in used_query_name:
             # new query name
             # output[dict_key][3].append('TEST')
-            print('hi')
             #request
             address = selected_country + " " + query_name
             url = f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?locationbias={loc}&fields=name%2Cformatted_address&language={lang}&inputtype=textquery&input={address}&key={key}"
@@ -110,7 +109,6 @@ if st.button(message):
 
             #process response
             try:
-                print('tried')
                 #只取搜尋結果前三個
                 for index, candidate in enumerate(candidates):
                     # output[dict_key][3].append('TEST')
@@ -139,13 +137,13 @@ if st.button(message):
         if (str(selected_query_mode) != "all") & (str(query_times) == str(selected_query_mode)):
             break
     done = True #是否顯示下載按鈕
-    st.write('query_times = ' + str(query_times))
+    print('query_times = ' + str(query_times))
 
 
 import csv
 
 if done:
-
+    my_bar.progress()
     csv_data = dict_to_csv(output)
     st.download_button(
     label="Download Result",
