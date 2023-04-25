@@ -78,9 +78,9 @@ done = False
 used_query_name = set()
 output=dict()
 if selected_query_mode == "all":
-    message = 'Comfirm & Execute '+ str(len(query_list))+ ' POIs'
+    message = 'Comfirm & Execute All '+ str(len(query_list))+ ' POIs'
 else :
-    message = 'Comfirm & Execute top'+ str(selected_query_mode)+ ' POIs'
+    message = 'Comfirm & Execute Only TOP'+ str(selected_query_mode)+ ' POIs'
 
 query_times = 0
 if st.button(message):
@@ -119,7 +119,7 @@ if st.button(message):
             output[query_name][0] += 1
         my_bar.progress(query_name/len(query_list), text='processing...')
 
-        if str(selected_query_mode) != "all" & str(query_times) == str(selected_query_mode):
+        if (str(selected_query_mode) != "all") & (str(query_times) == str(selected_query_mode)):
             break
     done = True #是否顯示下載按鈕
 import csv
