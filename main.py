@@ -58,21 +58,22 @@ except:
 
 st.header('3 - Confirm API Request Info')
 
-input_key = st.text_input(st.secrets["API_key"])
+input_key = st.text_input('Please enter your Google API Key',st.secrets["API_key"])
 selected_country = st.selectbox('Which country are you searching for?',st.secrets["country"])
 selected_language = st.selectbox('Which language do you want to return?',st.secrets["language"])
-selected_mode = st.selectbox('How many query you would like to execute?',st.secrets["test_mode"])
+selected_query_mode = st.selectbox('How many queries you would like to execute?(Please check your free quota)',st.secrets["test_mode"])
 
 ####
 
 done = False
 used_query_name = set()
 output=dict()
-if selected_mode == "all":
+if selected_query_mode == "all":
     message = 'Comfirm & Execute '+ str(len(query_list))+ ' POIs'
 else :
-    message = 'Comfirm & Execute '+ str(len(selected_mode))+ ' POIs'
+    message = 'Comfirm & Execute top'+ str(selected_query_mode)+ ' POIs'
 
+query_times = 0
 if st.button(message):
     my_bar = st.progress(0, text='processing...')  
     for query_name in query_list:
@@ -89,6 +90,7 @@ if st.button(message):
 
             #send request
             response = requests.get(url)
+            query_times +=1
             data = response.json()
             candidates = data['candidates']
 
@@ -108,6 +110,8 @@ if st.button(message):
             output[query_name][0] += 1
         my_bar.progress(query_name/len(query_list), text='processing...')
 
+        if selected_query_mode != "all" & query_times == selected_query_mode:
+            break
     done = True #是否顯示下載按鈕
 import csv
 
