@@ -26,7 +26,8 @@ st.set_page_config(
 )
 
 
-st.title('Klook POI Data CLeaning Tool')
+st.title('Klook POI Data Cleaning Tool')
+st.info('This tool uses Google Map API to query POI\'s name and address. Hence, to use this tool, you are required to provide your API key')
 
 
 #----------------------------------------#
