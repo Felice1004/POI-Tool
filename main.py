@@ -21,7 +21,6 @@ def get_colname_options(data):
 st.set_page_config(
    page_title="Klook POI 資料清洗小工具",
    page_icon="🧽",
-   layout="wide",
    initial_sidebar_state="expanded",
 )
 
