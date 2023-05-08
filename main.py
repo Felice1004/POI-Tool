@@ -147,7 +147,7 @@ if done:
     # my_bar.progress()
     csv_data = dict_to_csv(output)
     st.write('Preview data')
-    st.write(data)
+    st.write(csv_data)
     st.download_button(
     label="Download Result",
     data=csv_data,
