@@ -143,7 +143,7 @@ if st.button(message):
 import csv
 
 if done:
-    my_bar.progress()
+    # my_bar.progress()
     csv_data = dict_to_csv(output)
     st.download_button(
     label="Download Result",
