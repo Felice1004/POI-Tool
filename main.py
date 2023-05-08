@@ -92,7 +92,7 @@ if st.button(message):
     for dict_key in query_list:
         query_url = query_list[dict_key][0]
         query_name = str.lower(query_list[dict_key][1])
-        output[dict_key] = [0, query_url, query_name, [],[]] #show times, url, query name, query name, query address
+        output[dict_key] = [0, query_url, query_name, [],[],[]] #show times, url, query name, query name, query address, geo
 
         #只搜尋新地名
         if query_name not in used_query_name:
@@ -114,6 +114,7 @@ if st.button(message):
                     # output[dict_key][3].append('TEST')
                     output[dict_key][3].append(candidate['name'])
                     output[dict_key][4].append(candidate['formatted_address'])
+                    output[dict_key][5].append(candidate['geometry']['location'])
                     if index >= 3:
                         break
             except:
